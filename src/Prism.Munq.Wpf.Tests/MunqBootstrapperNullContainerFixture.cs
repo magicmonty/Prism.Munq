@@ -1,38 +1,36 @@
 using System;
 using System.Windows;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Prism.IocContainer.Wpf.Tests.Support;
+using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
-
-    [TestClass]
     public class MunqBootstrapperNullContainerFixture : BootstrapperFixtureBase
     {
-        [TestMethod]
-        public void RunThrowsWhenNullContainerCreated()
+        [Fact]
+        public void RunThrowsWhenNullContainerCreated ()
         {
-            var bootstrapper = new NullContainerBootstrapper();
+            var bootstrapper = new NullContainerBootstrapper ();
 
-            AssertExceptionThrownOnRun(bootstrapper, typeof(InvalidOperationException), "IocContainer");
+            AssertExceptionThrownOnRun (bootstrapper, typeof (InvalidOperationException), "IocContainer");
         }
 
         private class NullContainerBootstrapper : MunqBootstrapper
         {
-            protected override IMunqContainer CreateContainer()
+            protected override IIocContainer CreateContainer ()
             {
                 return null;
             }
 
-            protected override DependencyObject CreateShell()
+            protected override DependencyObject CreateShell ()
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException ();
             }
 
-            protected override void InitializeShell()
+            protected override void InitializeShell ()
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException ();
             }
-        }    
+        }
     }
 }

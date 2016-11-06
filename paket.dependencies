@@ -6,6 +6,7 @@ nuget xunit
 nuget Munq.IocContainer
 nuget Prism.Core 6.2.0
 nuget Prism.Wpf 6.2.0
+nuget Moq
 
 group Build
   source https://www.nuget.org/api/v2/

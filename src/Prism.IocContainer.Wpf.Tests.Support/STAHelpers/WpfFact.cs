@@ -1,10 +1,9 @@
 ﻿using System;
-using Xunit;
 using Xunit.Sdk;
 
 namespace Xunit.Wpf
 {
     [AttributeUsage (AttributeTargets.Method, AllowMultiple = false)]
-    [XunitTestCaseDiscoverer ("Xunit.Wpf.WpfFactDiscoverer", "Xunit.Wpf")]
+    [XunitTestCaseDiscoverer ("Xunit.Wpf.WpfFactDiscoverer", "Prism.IocContainer.Wpf.Tests.Support")]
     public class WpfFactAttribute : FactAttribute { }
 }

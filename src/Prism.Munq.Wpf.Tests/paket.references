@@ -1,2 +1,5 @@
 xunit
 Munq.IocContainer
+CommonServiceLocator
+Prism.Core
+Prism.Wpf

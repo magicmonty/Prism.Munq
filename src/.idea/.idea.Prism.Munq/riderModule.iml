@@ -8,8 +8,11 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../paket.dependencies" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file://$MODULE_DIR$/../../Prism.IocContainer.Wpf.Tests.Support" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf.Tests" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Prism.IocContainer.Wpf.Tests.Support/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Prism.IocContainer.Wpf.Tests.Support/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf.Tests/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf.Tests/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf/bin" />

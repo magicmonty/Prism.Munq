@@ -1,6 +1,7 @@
 FRAMEWORK: >= NET45
 NUGET
   remote: https://www.nuget.org/api/v2
+    Munq.IocContainer (3.1.6)
     xunit (2.1)
       xunit.assert (2.1)
       xunit.core (2.1)
@@ -13,3 +14,8 @@ NUGET
       xunit.abstractions (2.0)
     xunit.extensibility.execution (2.1)
       xunit.extensibility.core (2.1)
+
+GROUP Build
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FAKE (4.45.1)

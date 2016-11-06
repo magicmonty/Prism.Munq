@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+mono paket.exe restore
+mono packages/build/FAKE/tools/FAKE.exe $*

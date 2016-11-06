@@ -8,7 +8,7 @@ using System.Windows.Threading;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace XUnit.Wpf
+namespace Xunit.Wpf
 {
     /// <summary>
     /// Wraps test cases for FactAttribute and TheoryAttribute so the test case runs on the WPF STA thread

@@ -1,16 +1,16 @@
 using System.Linq;
 using Microsoft.Practices.ServiceLocation;
-using Prism.IocContainer.Wpf.Tests.Support.Mocks;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.Views;
 using Prism.Regions;
 using Prism.Munq.Wpf.Tests.Mocks;
 using Xunit;
+using Xunit.Wpf;
 
 namespace Prism.Munq.Wpf.Tests
 {
     public class MunqRegionNavigationContentLoaderFixture
     {
-        [Fact]
+        [WpfFact]
         public void ShouldFindCandidateViewInRegion ()
         {
             IIocContainer container = new MunqContainerWrapper ();
@@ -34,7 +34,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (testRegion.ActiveViews.Contains (view));
         }
 
-        [Fact]
+        [WpfFact]
         public void ShouldFindCandidateViewWithFriendlyNameInRegion ()
         {
             IIocContainer container = new MunqContainerWrapper ();

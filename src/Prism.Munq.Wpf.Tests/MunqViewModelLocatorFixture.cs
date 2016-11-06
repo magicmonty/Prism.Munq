@@ -3,12 +3,13 @@ using Prism.IocContainer.Wpf.Tests.Support.Mocks.ViewModels;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.Views;
 using Prism.Mvvm;
 using Xunit;
+using Xunit.Wpf;
 
 namespace Prism.Munq.Wpf.Tests
 {
     public class MunqViewModelLocatorFixture
     {
-        [Fact]
+        [WpfFact]
         public void ShouldLocateViewModelAndResolveWithContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();

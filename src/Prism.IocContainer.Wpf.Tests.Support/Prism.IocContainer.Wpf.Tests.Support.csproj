@@ -55,9 +55,15 @@
     <Compile Include="Mocks\ViewModels\MockViewModel.cs" />
     <Compile Include="Mocks\Views\MockView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="STAHelpers\WpfFact.cs" />
+    <Compile Include="STAHelpers\WpfFactDiscoverer.cs" />
+    <Compile Include="STAHelpers\WpfTestCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="STAHelpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

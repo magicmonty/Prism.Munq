@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Practices.ServiceLocation;
 using Xunit;
+using Xunit.Wpf;
 using Moq;
 using Prism.Events;
 using Prism.Logging;
@@ -14,21 +15,21 @@ namespace Prism.Munq.Wpf.Tests
 {
     public class MunqBootstrapperRunMethodFixture
     {
-        [Fact]
+        [WpfFact]
         public void CanRunBootstrapper ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
             bootstrapper.Run ();
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldNotFailIfReturnedNullShell ()
         {
             var bootstrapper = new DefaultMunqBootstrapper { ShellObject = null };
             bootstrapper.Run ();
         }
 
-        [Fact]
+        [WpfFact]
         public void RunConfiguresServiceLocatorProvider ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -37,7 +38,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (ServiceLocator.Current is MunqServiceLocatorAdapter);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldInitializeContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -53,7 +54,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.IsType (typeof (MunqContainerWrapper), container);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunAddsCompositionContainerToContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -64,7 +65,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.Equal (typeof (MunqContainerWrapper), returnedContainer.GetType ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunAddsDependencyResolverToContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -75,7 +76,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.Equal (typeof (MunqContainerWrapper), returnedContainer.GetType ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunAddsDependencyRegistrarToContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -86,7 +87,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.Equal (typeof (MunqContainerWrapper), returnedContainer.GetType ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallInitializeModules ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -95,7 +96,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.InitializeModulesCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallConfigureDefaultRegionBehaviors ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -105,7 +106,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.ConfigureDefaultRegionBehaviorsCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallConfigureRegionAdapterMappings ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -115,7 +116,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.ConfigureRegionAdapterMappingsCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldAssignRegionManagerToReturnedShell ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -125,7 +126,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.NotNull (RegionManager.GetRegionManager (bootstrapper.BaseShell));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallCreateLogger ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -135,7 +136,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.CreateLoggerCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallCreateModuleCatalog ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -145,7 +146,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.CreateModuleCatalogCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallConfigureModuleCatalog ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -155,7 +156,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.ConfigureModuleCatalogCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallCreateContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -165,7 +166,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.CreateContainerCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallCreateShell ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -175,7 +176,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.CreateShellCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallConfigureContainer ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -185,7 +186,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.ConfigureContainerCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallConfigureServiceLocator ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -195,7 +196,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.ConfigureServiceLocatorCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallConfigureViewModelLocator ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -205,7 +206,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (bootstrapper.ConfigureViewModelLocatorCalled);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersInstanceOfILoggerFacade ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -218,7 +219,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.RegisterInstance (bootstrapper.BaseLogger), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersInstanceOfIModuleCatalog ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -231,7 +232,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.RegisterInstance (It.IsAny<IModuleCatalog> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForIServiceLocator ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -244,7 +245,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register<IServiceLocator> (It.IsAny<Func<IDependencyResolver, IServiceLocator>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForIModuleInitializer ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -257,7 +258,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, IModuleInitializer>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForIRegionManager ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -270,7 +271,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, IRegionManager>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForRegionAdapterMappings ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -283,7 +284,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, RegionAdapterMappings>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForIRegionViewRegistry ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -296,7 +297,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, IRegionViewRegistry>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForIRegionBehaviorFactory ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -309,7 +310,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, IRegionBehaviorFactory>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunRegistersTypeForIEventAggregator ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -322,7 +323,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, IEventAggregator>> ()), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunFalseShouldNotRegisterDefaultServicesAndTypes ()
         {
             var mockedContainer = new Mock<IIocContainer> ();
@@ -338,7 +339,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedContainer.Verify (c => c.Register (It.IsAny<Func<IDependencyResolver, IModuleInitializer>> ()), Times.Never ());
         }
 
-        [Fact]
+        [WpfFact]
         public void ModuleManagerRunCalled ()
         {
             // Have to use a non-mocked container because of IsRegistered<> extension method, Registrations property,and ContainerRegistration
@@ -368,7 +369,7 @@ namespace Prism.Munq.Wpf.Tests
             mockedModuleManager.Verify (mm => mm.Run (), Times.Once ());
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldCallTheMethodsInOrder ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -389,7 +390,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.Equal ("InitializeModules", bootstrapper.MethodCalls [12]);
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogBootstrapperSteps ()
         {
             var bootstrapper = new DefaultMunqBootstrapper ();
@@ -414,7 +415,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages [15].Contains ("Bootstrapper sequence completed."));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogLoggerCreationSuccess ()
         {
             const string expectedMessageText = "Logger was created successfully.";
@@ -424,7 +425,7 @@ namespace Prism.Munq.Wpf.Tests
 
             Assert.True (messages.Contains (expectedMessageText));
         }
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutModuleCatalogCreation ()
         {
             const string expectedMessageText = "Creating module catalog.";
@@ -435,7 +436,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutConfiguringModuleCatalog ()
         {
             const string expectedMessageText = "Configuring module catalog.";
@@ -446,7 +447,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutCreatingTheContainer ()
         {
             const string expectedMessageText = "Creating Munq container.";
@@ -457,7 +458,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutConfiguringContainer ()
         {
             const string expectedMessageText = "Configuring the Munq container.";
@@ -468,7 +469,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutConfiguringViewModelLocator ()
         {
             const string expectedMessageText = "Configuring the ViewModelLocator to use Munq.";
@@ -479,7 +480,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutConfiguringRegionAdapters ()
         {
             const string expectedMessageText = "Configuring region adapters.";
@@ -490,7 +491,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutConfiguringRegionBehaviors ()
         {
             const string expectedMessageText = "Configuring default region behaviors.";
@@ -501,7 +502,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutRegisteringFrameworkExceptionTypes ()
         {
             const string expectedMessageText = "Registering Framework Exception Types.";
@@ -512,7 +513,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutCreatingTheShell ()
         {
             const string expectedMessageText = "Creating the shell.";
@@ -523,7 +524,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutInitializingTheShellIfShellCreated ()
         {
             const string expectedMessageText = "Initializing the shell.";
@@ -535,7 +536,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldNotLogAboutInitializingTheShellIfShellIsNotCreated ()
         {
             const string expectedMessageText = "Initializing shell";
@@ -547,7 +548,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.False (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutInitializingModules ()
         {
             const string expectedMessageText = "Initializing modules.";
@@ -558,7 +559,7 @@ namespace Prism.Munq.Wpf.Tests
             Assert.True (messages.Contains (expectedMessageText));
         }
 
-        [Fact]
+        [WpfFact]
         public void RunShouldLogAboutRunCompleting ()
         {
             const string expectedMessageText = "Bootstrapper sequence completed.";

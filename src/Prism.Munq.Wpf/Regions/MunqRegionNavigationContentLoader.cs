@@ -37,14 +37,18 @@ namespace Prism.Munq.Regions
         protected override IEnumerable<object> GetCandidatesFromRegion(IRegion region, string candidateNavigationContract)
         {
             if (candidateNavigationContract == null || candidateNavigationContract.Equals(string.Empty))
+            {
                 throw new ArgumentNullException(nameof(candidateNavigationContract));
+            }
 
-            var contractCandidates = base.GetCandidatesFromRegion(region, candidateNavigationContract).ToArray();
+            object[] contractCandidates = base.GetCandidatesFromRegion(region, candidateNavigationContract).ToArray();
 
             if (contractCandidates.Length > 0)
+            {
                 return contractCandidates;
+            }
 
-            var allRegistrations = _container.GetRegistrations<object>().ToArray();
+            IRegistration[] allRegistrations = _container.GetRegistrations<object>().ToArray();
 
             // First try friendly name registration. If not found, try type registration
             var matchingRegistration = allRegistrations.FirstOrDefault(r => candidateNavigationContract.Equals(r.Name, StringComparison.Ordinal))
@@ -55,11 +59,15 @@ namespace Prism.Munq.Regions
                                        });
 
             if (matchingRegistration == null)
+            {
                 return new object[0];
+            }
 
             var instance = matchingRegistration.CreateInstance();
             if (instance == null)
+            {
                 return new object[0];
+            }
 
             var typeCandidateName = instance.GetType().FullName;
 

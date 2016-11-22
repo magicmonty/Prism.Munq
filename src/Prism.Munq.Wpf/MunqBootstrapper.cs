@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using JetBrains.Annotations;
 using Munq;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Events;
@@ -196,6 +197,7 @@ namespace Prism.Munq
         /// Creates the <see cref="IIocContainer"/> that will be used as the default container.
         /// </summary>
         /// <returns>A new instance of <see cref="IIocContainer"/>.</returns>
+        [NotNull]
         protected virtual IIocContainer CreateContainer()
         {
             return new MunqContainerWrapper();
@@ -206,7 +208,7 @@ namespace Prism.Munq
         /// </summary>
         /// <param name="factory">The factory method for creating the instance</param>
         /// <param name="registerAsSingleton">Registers the type as a singleton.</param>
-        protected void RegisterTypeIfMissing<TFrom>(Func<IDependencyResolver, TFrom> factory, bool registerAsSingleton) where TFrom: class
+        protected void RegisterTypeIfMissing<TFrom>([NotNull] Func<IDependencyResolver, TFrom> factory, bool registerAsSingleton) where TFrom: class
         {
             if (factory == null)
             {

@@ -16,3 +16,16 @@
 
 ## File-based project format:
 *.iws
+
+## Resharper
+**/_ReSharper*
+
+## FAKE
+**/.fake/
+
+## Project specific excludes
+**/out/
+**/packages/
+**/bin/
+**/obj/
+*.user

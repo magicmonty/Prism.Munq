@@ -2,12 +2,18 @@ source https://www.nuget.org/api/v2/
 framework >= net45
 
 nuget CommonServiceLocator
-nuget xunit
 nuget Munq.IocContainer
 nuget Prism.Core 6.2.0
 nuget Prism.Wpf 6.2.0
-nuget Moq
+nuget JetBrains.Annotations
 
 group Build
   source https://www.nuget.org/api/v2/
   nuget FAKE
+
+group Test
+  source https://www.nuget.org/api/v2/
+  nuget Moq
+  nuget Shouldly
+  nuget xunit
+  nuget xunit.runner.console

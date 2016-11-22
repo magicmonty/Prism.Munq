@@ -8,7 +8,7 @@ using System.Windows.Threading;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Xunit.Wpf
+namespace Prism.IocContainer.Wpf.Tests.Support.WPFHelpers
 {
     /// <summary>
     /// Wraps test cases for FactAttribute and TheoryAttribute so the test case runs on the WPF STA thread
@@ -16,11 +16,11 @@ namespace Xunit.Wpf
     [DebuggerDisplay (@"\{ class = {TestMethod.TestClass.Class.Name}, method = {TestMethod.Method.Name}, display = {DisplayName}, skip = {SkipReason} \}")]
     public class WpfTestCase : LongLivedMarshalByRefObject, IXunitTestCase
     {
-        IXunitTestCase testCase;
+        private IXunitTestCase _testCase;
 
         public WpfTestCase (IXunitTestCase testCase)
         {
-            this.testCase = testCase;
+            _testCase = testCase;
         }
 
         /// <summary/>
@@ -28,9 +28,7 @@ namespace Xunit.Wpf
         [Obsolete ("Called by the de-serializer", error: true)]
         public WpfTestCase () { }
 
-        public IMethodInfo Method {
-            get { return testCase.Method; }
-        }
+        public IMethodInfo Method => _testCase.Method;
 
         public Task<RunSummary> RunAsync (IMessageSink diagnosticMessageSink,
                                          IMessageBus messageBus,
@@ -46,7 +44,7 @@ namespace Xunit.Wpf
                     SynchronizationContext.SetSynchronizationContext (new DispatcherSynchronizationContext ());
 
                     // Start off the test method.
-                    var testCaseTask = testCase.RunAsync (diagnosticMessageSink, messageBus, constructorArguments, aggregator, cancellationTokenSource);
+                    Task<RunSummary> testCaseTask = _testCase.RunAsync (diagnosticMessageSink, messageBus, constructorArguments, aggregator, cancellationTokenSource);
 
                     // Arrange to pump messages to execute any async work associated with the test.
                     var frame = new DispatcherFrame ();
@@ -73,59 +71,74 @@ namespace Xunit.Wpf
         }
 
         public string DisplayName {
-            get { return testCase.DisplayName; }
+            get { return _testCase.DisplayName; }
         }
 
         public string SkipReason {
-            get { return testCase.SkipReason; }
+            get { return _testCase.SkipReason; }
         }
 
         public ISourceInformation SourceInformation {
-            get { return testCase.SourceInformation; }
-            set { testCase.SourceInformation = value; }
+            get { return _testCase.SourceInformation; }
+            set { _testCase.SourceInformation = value; }
         }
 
         public ITestMethod TestMethod {
-            get { return testCase.TestMethod; }
+            get { return _testCase.TestMethod; }
         }
 
         public object [] TestMethodArguments {
-            get { return testCase.TestMethodArguments; }
+            get { return _testCase.TestMethodArguments; }
         }
 
         public Dictionary<string, List<string>> Traits {
-            get { return testCase.Traits; }
+            get { return _testCase.Traits; }
         }
 
         public string UniqueID {
-            get { return testCase.UniqueID; }
+            get { return _testCase.UniqueID; }
         }
 
         public void Deserialize (IXunitSerializationInfo info)
         {
-            testCase = info.GetValue<IXunitTestCase> ("InnerTestCase");
+            _testCase = info.GetValue<IXunitTestCase> ("InnerTestCase");
         }
 
         public void Serialize (IXunitSerializationInfo info)
         {
-            info.AddValue ("InnerTestCase", testCase);
+            info.AddValue ("InnerTestCase", _testCase);
         }
 
         private static void CopyTaskResultFrom<T> (TaskCompletionSource<T> tcs, Task<T> template)
         {
             if (tcs == null)
+            {
                 throw new ArgumentNullException (nameof (tcs));
+            }
             if (template == null)
+            {
                 throw new ArgumentNullException (nameof (template));
+            }
             if (!template.IsCompleted)
+            {
                 throw new ArgumentException ("Task must be completed first.", nameof (template));
+            }
 
             if (template.IsFaulted)
-                tcs.SetException (template.Exception);
+            {
+                if (template.Exception != null)
+                {
+                    tcs.SetException (template.Exception);
+                }
+            }
             else if (template.IsCanceled)
+            {
                 tcs.SetCanceled ();
+            }
             else
+            {
                 tcs.SetResult (template.Result);
+            }
         }
     }
 }

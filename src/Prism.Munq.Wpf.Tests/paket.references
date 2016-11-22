@@ -1,6 +1,9 @@
-xunit
 Munq.IocContainer
 CommonServiceLocator
-Moq
 Prism.Core
 Prism.Wpf
+
+group Test
+  xunit
+  Shouldly
+  Moq

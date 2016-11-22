@@ -4,11 +4,11 @@ using System.Windows;
 using System.Windows.Controls;
 using Prism.IocContainer.Wpf.Tests.Support;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks;
+using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
 using Xunit;
-using Xunit.Wpf;
 
 namespace Prism.Munq.Wpf.Tests
 {
@@ -26,7 +26,7 @@ namespace Prism.Munq.Wpf.Tests
         [WpfFact]
         public void CanCreateConcreteBootstrapper ()
         {
-            new DefaultMunqBootstrapper ();
+            var defaultMunqBootstrapper = new DefaultMunqBootstrapper ();
         }
 
         [WpfFact]

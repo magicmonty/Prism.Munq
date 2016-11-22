@@ -1,8 +1,8 @@
 using System;
 using System.Windows;
 using Prism.IocContainer.Wpf.Tests.Support;
+using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Xunit;
-using Xunit.Wpf;
 
 namespace Prism.Munq.Wpf.Tests
 {

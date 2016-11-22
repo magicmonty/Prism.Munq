@@ -120,7 +120,9 @@ namespace Prism.Munq
 
         public TType Resolve<TType>(string name) where TType : class
         {
-            return _baseContainer.Resolve<TType>(name);
+            return string.IsNullOrEmpty(name)
+                ? _baseContainer.Resolve<TType>()
+                : _baseContainer.Resolve<TType>(name);
         }
 
         public object Resolve(Type type)
@@ -130,7 +132,9 @@ namespace Prism.Munq
 
         public object Resolve(string name, Type type)
         {
-            return _baseContainer.Resolve(name, type);
+            return string.IsNullOrEmpty(name)
+                ? _baseContainer.Resolve(type)
+                : _baseContainer.Resolve(name, type);
         }
 
         public IEnumerable<TType> ResolveAll<TType>() where TType : class

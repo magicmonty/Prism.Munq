@@ -1,10 +1,10 @@
 using System.Linq;
 using Microsoft.Practices.ServiceLocation;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.Views;
+using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Prism.Regions;
 using Prism.Munq.Wpf.Tests.Mocks;
 using Xunit;
-using Xunit.Wpf;
 
 namespace Prism.Munq.Wpf.Tests
 {

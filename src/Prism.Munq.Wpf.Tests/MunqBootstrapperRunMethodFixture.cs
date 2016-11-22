@@ -3,13 +3,13 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Practices.ServiceLocation;
 using Xunit;
-using Xunit.Wpf;
 using Moq;
 using Prism.Events;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
 using Munq;
+using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 
 namespace Prism.Munq.Wpf.Tests
 {

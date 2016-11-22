@@ -1,3 +1,6 @@
-xunit
 Prism.Core
 Prism.Wpf
+
+group Test
+  xunit
+  Shouldly

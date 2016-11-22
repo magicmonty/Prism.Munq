@@ -1,9 +1,10 @@
 ﻿using Prism.IocContainer.Wpf.Tests.Support.Mocks;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.ViewModels;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.Views;
+using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Prism.Mvvm;
+using Shouldly;
 using Xunit;
-using Xunit.Wpf;
 
 namespace Prism.Munq.Wpf.Tests
 {
@@ -17,14 +18,13 @@ namespace Prism.Munq.Wpf.Tests
 
             bootstrapper.BaseContainer.Register<IService, MockService> ();
 
-            MockView view = new MockView ();
-            Assert.Null (view.DataContext);
+            var view = new MockView ();
+            view.DataContext.ShouldBeNull();
 
-            ViewModelLocator.SetAutoWireViewModel (view, true);
-            Assert.NotNull (view.DataContext);
-            Assert.IsType (typeof (MockViewModel), view.DataContext);
-
-            Assert.NotNull (((MockViewModel)view.DataContext).MockService);
+            ViewModelLocator.SetAutoWireViewModel (view, value: true);
+            view.DataContext.ShouldNotBeNull();
+            view.DataContext.ShouldBeOfType<MockViewModel>();
+            ((MockViewModel)view.DataContext).MockService.ShouldNotBeNull();
         }
     }
 }

@@ -17,6 +17,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf.Tests/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../Prism.Munq.Wpf/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../_ReSharper.Caches/ReSharperHost7.Prism.Munq.00" />
       <excludeFolder url="file://$MODULE_DIR$/../../packages" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using JetBrains.Annotations;
 using Munq;
 
 namespace Prism.Munq
@@ -11,10 +11,11 @@ namespace Prism.Munq
         /// <typeparam name="T">The Type of the object to register</typeparam>
         /// <param name="container"><see cref="IDependecyRegistrar"/> used to register type for Navigation.</param>
         /// <param name="name">The unique name to register with the object.</param>
-        public static IDependecyRegistrar RegisterTypeForNavigation<T>(this IDependecyRegistrar container, string name = null)
+        [NotNull, PublicAPI]
+        public static IDependecyRegistrar RegisterTypeForNavigation<T>([NotNull] this IDependecyRegistrar container, string name = null)
         {
-            Type type = typeof(T);
-            string viewName = string.IsNullOrWhiteSpace(name) ? type.Name : name;
+            var type = typeof(T);
+            var viewName = string.IsNullOrWhiteSpace(name) ? type.Name : name;
 
             container.Register(viewName, typeof(object), type);
 

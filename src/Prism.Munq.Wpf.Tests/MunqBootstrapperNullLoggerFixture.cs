@@ -1,36 +1,38 @@
 using System;
 using System.Windows;
-using Prism.IocContainer.Wpf.Tests.Support;
 using Prism.Logging;
+using Shouldly;
 using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
-    public class MunqBootstrapperNullLoggerFixture : BootstrapperFixtureBase
+    public class MunqBootstrapperNullLoggerFixture
     {
         [Fact]
-        public void NullLoggerThrows ()
+        public void NullLoggerThrows()
         {
-            var bootstrapper = new NullLoggerBootstrapper ();
+            var bootstrapper = new NullLoggerBootstrapper();
 
-            AssertExceptionThrownOnRun (bootstrapper, typeof (InvalidOperationException), "ILoggerFacade");
+            Should
+                .Throw<InvalidOperationException>(() => bootstrapper.Run())
+                .Message.ShouldContain("ILoggerFacade");
         }
 
-        internal class NullLoggerBootstrapper : MunqBootstrapper
+        private class NullLoggerBootstrapper : MunqBootstrapper
         {
-            protected override ILoggerFacade CreateLogger ()
+            protected override ILoggerFacade CreateLogger()
             {
                 return null;
             }
 
-            protected override DependencyObject CreateShell ()
+            protected override DependencyObject CreateShell()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            protected override void InitializeShell ()
+            protected override void InitializeShell()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
     }

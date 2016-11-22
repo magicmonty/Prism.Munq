@@ -1,27 +1,26 @@
 using System;
 using System.Windows;
-using Prism.IocContainer.Wpf.Tests.Support;
 using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
-using Xunit;
+using Shouldly;
 
 namespace Prism.Munq.Wpf.Tests
 {
-    public class MunqBootstrapperNullContainerFixture : BootstrapperFixtureBase
+    public class MunqBootstrapperNullContainerFixture
     {
         [WpfFact]
         public void RunThrowsWhenNullContainerCreated ()
         {
-            var bootstrapper = new NullContainerBootstrapper ();
+            var bootstrapper = new NullContainerBootstrapper();
 
-            AssertExceptionThrownOnRun (bootstrapper, typeof (InvalidOperationException), "IocContainer");
+            Should
+                .Throw<InvalidOperationException>(() => bootstrapper.Run())
+                .Message.ShouldContain("IocContainer");
         }
 
         private class NullContainerBootstrapper : MunqBootstrapper
         {
-            protected override IIocContainer CreateContainer ()
-            {
-                return null;
-            }
+            // ReSharper disable once AssignNullToNotNullAttribute
+            protected override IIocContainer CreateContainer () => null;
 
             protected override DependencyObject CreateShell ()
             {

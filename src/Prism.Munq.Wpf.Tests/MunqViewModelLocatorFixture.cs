@@ -4,27 +4,27 @@ using Prism.IocContainer.Wpf.Tests.Support.Mocks.Views;
 using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Prism.Mvvm;
 using Shouldly;
-using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
     public class MunqViewModelLocatorFixture
     {
         [WpfFact]
-        public void ShouldLocateViewModelAndResolveWithContainer ()
+        public void ShouldLocateViewModelAndResolveWithContainer()
         {
-            var bootstrapper = new DefaultMunqBootstrapper ();
-            bootstrapper.Run ();
+            var bootstrapper = new DefaultMunqBootstrapper();
+            bootstrapper.Run();
 
-            bootstrapper.BaseContainer.Register<IService, MockService> ();
+            bootstrapper.BaseContainer.Register<IService, MockService>();
 
-            var view = new MockView ();
+            var view = new MockView();
             view.DataContext.ShouldBeNull();
 
-            ViewModelLocator.SetAutoWireViewModel (view, value: true);
+            ViewModelLocator.SetAutoWireViewModel(view, value: true);
+
             view.DataContext.ShouldNotBeNull();
             view.DataContext.ShouldBeOfType<MockViewModel>();
-            ((MockViewModel)view.DataContext).MockService.ShouldNotBeNull();
+            ((MockViewModel) view.DataContext).MockService.ShouldNotBeNull();
         }
     }
 }

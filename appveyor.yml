@@ -13,3 +13,6 @@ test_script:
 - cmd: .\packages\build\FAKE\tools\FAKE.exe Test
 deploy_script: 
 - cmd: .\packages\build\FAKE\tools\FAKE.exe CreateNugetPackage
+artifacts:
+- path: deploy/*.nupkg
+  name: NuGet

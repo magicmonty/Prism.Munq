@@ -39,6 +39,7 @@ Target "Build" (fun _ ->
     { defaults with
         Verbosity = Some(Quiet)
         NodeReuse = false
+        MaxCpuCount = Some (Some 1)
         NoLogo = true
         Targets = ["Build"]
         Properties = 

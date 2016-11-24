@@ -8,7 +8,7 @@ build_script:
 - cmd: >-
     .\paket.exe restore
     
-    .\packages\build\FAKE\toolse\FAKE.exe CreateNugetPackage
+    .\packages\build\FAKE\tools\FAKE.exe CreateNugetPackage
 test: off
 artifacts:
 - path: deploy/*.nupkg

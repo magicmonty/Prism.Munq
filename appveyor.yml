@@ -11,4 +11,5 @@ build_script:
     .\packages\build\FAKE\tools\FAKE.exe Build
 test_script:
 - cmd: .\packages\build\FAKE\tools\FAKE.exe Test
-deploy: off
+deploy_script: 
+- cmd: .\packages\build\FAKE\tools\FAKE.exe CreateNugetPackage

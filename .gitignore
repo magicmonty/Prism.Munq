@@ -25,9 +25,12 @@
 
 ## Project specific excludes
 **/out/
+**/deploy/
 **/packages/
 **/bin/
 **/obj/
 *.user
+
+paket.template
 
 **/TestResult.xml

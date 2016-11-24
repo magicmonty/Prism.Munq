@@ -5,8 +5,11 @@ open Fake.Testing.NUnit3
 open ReleaseNotesHelper
 open BuildServerHelper
 open AssemblyInfoHelper
+open PaketTemplate
+open Paket
 
 let outputDirectory = @"out"
+let deployDirectory = @"deploy"
 let releaseNotes = LoadReleaseNotes "ReleaseNotes.md"
 
 let version = 
@@ -20,10 +23,11 @@ let nugetVersion = sprintf "%i.%i.%i%s" version.Major version.Minor version.Patc
 tracefn "Assembly Version: %s" asmVersion
 tracefn "NuGet Version: %s" nugetVersion
 
-Target "Clean" (fun _ ->
+Target "Clean" (fun _ ->  
   !! "**/bin"
   ++ "**/obj"
-  ++ "**/out"
+  ++ outputDirectory
+  ++ deployDirectory
   |> DeleteDirs
 )
 
@@ -46,7 +50,7 @@ Target "Build" (fun _ ->
           [
             "Optimize", "True"
             "DebugSymbols", "True"
-            "Configuration", "Debug"
+            "Configuration", "Release"
             "OutputPath", outputDirectory |> FullName |> trimSeparator
           ]
     }
@@ -61,6 +65,37 @@ Target "Test" (fun _ ->
         ToolPath = "./packages/test/Nunit.ConsoleRunner/tools/nunit3-console.exe"
         OutputDir = (outputDirectory @@ "TestResults.xml")
     })
+)
+
+Target "CreateNugetPackage" (fun _ ->
+  deployDirectory |> CleanDir
+
+  PaketTemplate (fun p -> { p with TemplateFilePath = Some "paket.template"
+                                   TemplateType = File
+                                   Id = Some "Prism.Munq"
+                                   Description = [ "Use these extensions to build Prism applications based on Munq." ]
+                                   Summary =  [ "Munq extensions for Prism" ]
+                                   Tags = [ "prism"; "mvvm"; "wpf"; "munq"; "dependency injection"; "di" ]
+                                   RequireLicenseAcceptance = Some false
+                                   ReleaseNotes = releaseNotes.Notes  
+                                   Version = Some nugetVersion 
+                                   Authors = ["Martin Gondermann"] 
+                                   Owners = ["Martin Gondermann"]
+                                   IconUrl = Some "http://prismlibrary.github.io/images/prism-logo-graphic-128.png"
+                                   Language = Some "en-US"
+                                   Files = 
+                                    [
+                                      Include (outputDirectory @@ "Prism.Munq.Wpf.dll", "/lib/net45")
+                                    ] 
+                                   Dependencies = 
+                                    [
+                                      "Prism.Wpf", GreaterOrEqualSafe LOCKEDVERSION
+                                      "Prism.Core", GreaterOrEqualSafe LOCKEDVERSION
+                                      "Munq.IocContainer", GreaterOrEqualSafe LOCKEDVERSION
+                                      "CommonServiceLocator", GreaterOrEqualSafe LOCKEDVERSION ] } )
+  Pack (fun p -> { p with TemplateFile = "paket.template"
+                          OutputPath = deployDirectory 
+                          Version = nugetVersion }) 
 )
 
 "Clean"

@@ -7,6 +7,7 @@ environment:
 build_script:
 - cmd: >-
     paket.exe restore
+    
     .\packages\build\FAKE\tools\FAKE.exe Build
 test_script:
 - cmd: .\packages\build\FAKE\tools\FAKE.exe Test

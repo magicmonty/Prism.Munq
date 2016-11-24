@@ -6,9 +6,9 @@ environment:
   PATH: C:\Program Files (x86)\MSBuild\14.0\Bin\;%PATH%
 build_script:
 - cmd: >-
-    paket.exe restore
+    .\paket.exe restore
     
-    CreateNugetPackage
+    .\packages\build\FAKE\toolse\FAKE.exe CreateNugetPackage
 test: off
 artifacts:
 - path: deploy/*.nupkg

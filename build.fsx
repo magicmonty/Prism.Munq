@@ -103,4 +103,6 @@ Target "CreateNugetPackage" (fun _ ->
   ==> "Build"
   =?> ("Test", outputDirectory |> directoryExists |> not)
 
+"Test" ==> "CreateNugetPackage"
+
 RunTargetOrDefault "Build"

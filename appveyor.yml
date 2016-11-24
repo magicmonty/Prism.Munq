@@ -1,4 +1,4 @@
-version: {build}
+version: "{build}"
 image: Visual Studio 2015
 configuration: Release
 platform: Any CPU

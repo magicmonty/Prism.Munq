@@ -1,0 +1,13 @@
+version: 6.2.0.{build}
+image: Visual Studio 2015
+configuration: Release
+platform: Any CPU
+environment:
+  PATH: C:\Program Files (x86)\MSBuild\14.0\Bin\;%PATH%
+build_script:
+- cmd: >-
+    paket.exe restore
+    .\packages\build\FAKE\tools\FAKE.exe Build
+test_script:
+- cmd: .\packages\build\FAKE\tools\FAKE.exe Test
+deploy: off

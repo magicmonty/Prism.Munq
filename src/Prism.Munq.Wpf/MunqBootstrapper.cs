@@ -141,7 +141,7 @@ namespace Prism.Munq
                         _.Resolve<IModuleCatalog>(),
                         _.Resolve<ILoggerFacade>()), true);
 
-                RegisterTypeIfMissing(_ => new RegionAdapterMappings(), true);
+                RegisterTypeIfMissing<RegionAdapterMappings>(_ => new RegionAdapterMappings(), true);
                 RegisterTypeIfMissing<IRegionManager>(_ => new RegionManager(), true);
                 RegisterTypeIfMissing<IEventAggregator>(_ => new EventAggregator(), true);
 

@@ -4,6 +4,6 @@ Prism.Core
 Prism.Wpf
 
 group Test
-  xunit
+  NUnit
   Shouldly
   Moq

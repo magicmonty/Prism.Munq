@@ -29,3 +29,5 @@
 **/bin/
 **/obj/
 *.user
+
+**/TestResult.xml

@@ -1,14 +1,15 @@
 using System;
 using System.Windows;
+using NUnit.Framework;
 using Prism.Modularity;
 using Shouldly;
-using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
+    [TestFixture]
     public class MunqBootstrapperNullModuleCatalogFixture
     {
-        [Fact]
+        [Test]
         public void NullModuleCatalogThrowsOnDefaultModuleInitialization()
         {
             var bootstrapper = new NullModuleCatalogBootstrapper();

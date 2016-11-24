@@ -1,14 +1,15 @@
 using System;
 using System.Windows;
+using NUnit.Framework;
 using Prism.Logging;
 using Shouldly;
-using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
+    [TestFixture]
     public class MunqBootstrapperNullLoggerFixture
     {
-        [Fact]
+        [Test]
         public void NullLoggerThrows()
         {
             var bootstrapper = new NullLoggerBootstrapper();

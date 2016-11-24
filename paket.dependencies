@@ -15,5 +15,5 @@ group Test
   source https://www.nuget.org/api/v2/
   nuget Moq
   nuget Shouldly
-  nuget xunit
-  nuget xunit.runner.console
+  nuget NUnit
+  nuget NUnit.Console

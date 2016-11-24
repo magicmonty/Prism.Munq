@@ -1,13 +1,14 @@
 using System;
 using System.Windows;
-using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
+using NUnit.Framework;
 using Shouldly;
 
 namespace Prism.Munq.Wpf.Tests
 {
+    [TestFixture]
     public class MunqBootstrapperNullContainerFixture
     {
-        [WpfFact]
+        [Test]
         public void RunThrowsWhenNullContainerCreated ()
         {
             var bootstrapper = new NullContainerBootstrapper();

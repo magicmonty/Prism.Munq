@@ -30,7 +30,21 @@ namespace Prism.Munq
         /// <returns>The requested service instance.</returns>
         protected override object DoGetInstance(Type serviceType, string key)
         {
-            return _munqContainer.Resolve(key, serviceType);
+            try
+            {
+                return _munqContainer.Resolve(key, serviceType);
+            }
+            catch (KeyNotFoundException)
+            {
+                try
+                {
+                    return _munqContainer.Resolve(serviceType.FullName, serviceType);
+                }
+                catch (KeyNotFoundException)
+                {
+                    return _munqContainer.Resolve(serviceType);
+                }
+            }
         }
 
         /// <summary>

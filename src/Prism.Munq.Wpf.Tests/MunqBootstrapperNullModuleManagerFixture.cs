@@ -1,14 +1,15 @@
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
+using NUnit.Framework;
 using Prism.Regions;
 using Shouldly;
-using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
+    [TestFixture]
     public class MunqBootstrapperNullModuleManagerFixture
     {
-        [Fact]
+        [Test]
         public void RunShouldNotCallInitializeModulesWhenModuleManagerNotFound()
         {
             var bootstrapper = new NullModuleManagerBootstrapper();

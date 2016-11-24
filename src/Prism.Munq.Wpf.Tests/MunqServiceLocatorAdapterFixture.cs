@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Practices.ServiceLocation;
 using Munq;
+using NUnit.Framework;
 using Shouldly;
-using Xunit;
 
 namespace Prism.Munq.Wpf.Tests
 {
     public class MunqServiceLocatorAdapterFixture
     {
-        [Fact]
+        [Test]
         public void ShouldForwardResolveToInnerContainer()
         {
             var myInstance = new object();
@@ -21,7 +21,7 @@ namespace Prism.Munq.Wpf.Tests
             containerAdapter.GetInstance(typeof(object)).ShouldBeSameAs(myInstance);
         }
 
-        [Fact]
+        [Test]
         public void ShouldForwardResolveAllToInnerContainer()
         {
             IEnumerable<object> list = new List<object> { new object(), new object() };

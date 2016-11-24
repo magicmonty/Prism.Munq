@@ -1,15 +1,17 @@
-﻿using Prism.IocContainer.Wpf.Tests.Support.Mocks;
+﻿using System.Threading;
+using NUnit.Framework;
+using Prism.IocContainer.Wpf.Tests.Support.Mocks;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.ViewModels;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks.Views;
-using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Prism.Mvvm;
 using Shouldly;
 
 namespace Prism.Munq.Wpf.Tests
 {
+    [TestFixture, Apartment(ApartmentState.STA)]
     public class MunqViewModelLocatorFixture
     {
-        [WpfFact]
+        [Test]
         public void ShouldLocateViewModelAndResolveWithContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();

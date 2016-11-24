@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using NUnit.Framework;
 using Prism.IocContainer.Wpf.Tests.Support.Mocks;
-using Prism.IocContainer.Wpf.Tests.Support.WPFHelpers;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
@@ -11,9 +12,10 @@ using Shouldly;
 
 namespace Prism.Munq.Wpf.Tests
 {
+    [TestFixture, Apartment(ApartmentState.STA)]
     public class MunqBootstrapperFixture
     {
-        [WpfFact]
+        [Test]
         public void ContainerDefaultsToNull()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -22,13 +24,13 @@ namespace Prism.Munq.Wpf.Tests
             container.ShouldBeNull();
         }
 
-        [WpfFact]
+        [Test]
         public void CanCreateConcreteBootstrapper()
         {
             Should.NotThrow(() => new DefaultMunqBootstrapper());
         }
 
-        [WpfFact]
+        [Test]
         public void CreateContainerShouldInitializeContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -39,7 +41,7 @@ namespace Prism.Munq.Wpf.Tests
             container.ShouldBeOfType<MunqContainerWrapper>();
         }
 
-        [WpfFact]
+        [Test]
         public void ConfigureContainerAddsModuleCatalogToContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -50,7 +52,7 @@ namespace Prism.Munq.Wpf.Tests
             returnedCatalog.ShouldBeAssignableTo<ModuleCatalog>();
         }
 
-        [WpfFact]
+        [Test]
         public void ConfigureContainerAddsLoggerFacadeToContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -60,7 +62,7 @@ namespace Prism.Munq.Wpf.Tests
             returnedCatalog.ShouldNotBeNull();
         }
 
-        [WpfFact]
+        [Test]
         public void ConfigureContainerAddsRegionNavigationJournalEntryToContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -74,7 +76,7 @@ namespace Prism.Munq.Wpf.Tests
             actual1.ShouldNotBeSameAs(actual2);
         }
 
-        [WpfFact]
+        [Test]
         public void ConfigureContainerAddsRegionNavigationJournalToContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -88,7 +90,7 @@ namespace Prism.Munq.Wpf.Tests
             actual1.ShouldNotBeSameAs(actual2);
         }
 
-        [WpfFact]
+        [Test]
         public void ConfigureContainerAddsRegionNavigationServiceToContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();
@@ -102,7 +104,7 @@ namespace Prism.Munq.Wpf.Tests
             actual1.ShouldNotBeSameAs(actual2);
         }
 
-        [WpfFact]
+        [Test]
         public void ConfigureContainerAddsNavigationTargetHandlerToContainer()
         {
             var bootstrapper = new DefaultMunqBootstrapper();

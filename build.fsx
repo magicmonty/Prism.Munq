@@ -85,7 +85,7 @@ Target "CreateNugetPackage" (fun _ ->
                                    Language = Some "en-US"
                                    Files = 
                                     [
-                                      Include (outputDirectory @@ "Prism.Munq.Wpf.dll", "/lib/net45")
+                                      Include (outputDirectory @@ "Prism.Munq.Wpf.dll", @"lib\net45")
                                     ] 
                                    Dependencies = 
                                     [

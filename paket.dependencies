@@ -1,5 +1,5 @@
 source https://www.nuget.org/api/v2/
-framework >= net45
+framework net45
 
 nuget CommonServiceLocator
 nuget Munq.IocContainer
@@ -13,6 +13,8 @@ group Build
 
 group Test
   source https://www.nuget.org/api/v2/
+  framework net45
+  
   nuget Moq
   nuget Shouldly
   nuget NUnit

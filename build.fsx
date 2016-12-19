@@ -12,10 +12,14 @@ let outputDirectory = @"out"
 let deployDirectory = @"deploy"
 let releaseNotes = LoadReleaseNotes "ReleaseNotes.md"
 
+
 let version = 
   match buildServer with
-  | AppVeyor -> { releaseNotes.SemVer with Build = appVeyorBuildVersion }
+  | AppVeyor -> match environVarOrNone "APPVEYOR_REPO_TAG_NAME" with
+                | Some tag -> SemVerHelper.parse tag
+                | _ -> { releaseNotes.SemVer with Build = appVeyorBuildVersion }
   | _ -> releaseNotes.SemVer
+  
 let buildNumber = match version.Build with | "" -> "" | v -> "." + v
 let asmVersion = sprintf "%i.%i.%i%s" version.Major version.Minor version.Patch (match version.Build with | "" -> "" | v -> "." + v)
 let nugetVersion = sprintf "%i.%i.%i%s" version.Major version.Minor version.Patch (match version.Build with | "" -> "" | v -> "-build" + v)

@@ -1,16 +1,42 @@
-version: "{build}"
+version: "{build}-{branch}"
 image: Visual Studio 2015
-configuration: Release
-platform: Any CPU
 environment:
   PATH: C:\Program Files (x86)\MSBuild\14.0\Bin\;%PATH%
+
+branches:
+  only:
+    - master
+
+nuget:
+  disable_publish_on_pr: true
+
+artifacts:
+- path: 'deploy\*.nupkg'
+  name: NuGet
+
 build_script:
 - cmd: >-
     .\paket.exe restore
     
     .\packages\build\FAKE\tools\FAKE.exe CreateNugetPackage
+
 test: off
-artifacts:
-- path: deploy/*.nupkg
-  name: NuGet
-deploy: off
+
+deploy: 
+  - provider: GitHub
+    tag: '{APPVEYOR_REPO_TAG_NAME}'
+    release: 'Release {APPVEYOR_REPO_TAG_NAME}'
+    auth_token:
+      secure: Dx8eB38O4hJW/LQJFYyIvLnIkUtEY0RtcKZqjh4fS2Ij2fnAoI87zK+Iif+uiIAx
+    artifact: /.*deploy\\.*\.nupkg/
+    on:
+      branch: master
+      appveyor_repo_tag: true
+    
+  - provider: NuGet
+    api_key:
+      secure: 5+5/ePYUVDkfxaM2M41t3tFCau5y8spzxa4Wf0J20RPxLEURWgF7cq3qOEqNz1ik
+    artifact: /.*deploy\\.*\.nupkg/
+    on:
+      branch: master
+      appveyor_repo_tag: true

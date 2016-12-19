@@ -73,15 +73,18 @@ Target "CreateNugetPackage" (fun _ ->
   PaketTemplate (fun p -> { p with TemplateFilePath = Some "paket.template"
                                    TemplateType = File
                                    Id = Some "Prism.Munq"
+                                   Title = Some "Prism.Munq"
+                                   Authors = ["Martin Gondermann"] 
+                                   Owners = ["Martin Gondermann"]
+                                   ProjectUrl = Some "https://github.com/magicmonty/Prism.Munq"
+                                   LicenseUrl =Some "https://raw.githubusercontent.com/magicmonty/Prism.Munq/master/LICENSE.txt"
+                                   Copyright = Some (sprintf "(c) %i by Martin Gondermann" System.DateTime.Today.Year)
                                    Description = [ "Use these extensions to build Prism applications based on Munq." ]
                                    Summary =  [ "Munq extensions for Prism" ]
                                    Tags = [ "prism"; "mvvm"; "wpf"; "munq"; "dependency injection"; "di" ]
                                    RequireLicenseAcceptance = Some false
                                    ReleaseNotes = releaseNotes.Notes  
                                    Version = Some nugetVersion 
-                                   Authors = ["Martin Gondermann"] 
-                                   Owners = ["Martin Gondermann"]
-                                   IconUrl = Some "http://prismlibrary.github.io/images/prism-logo-graphic-128.png"
                                    Language = Some "en-US"
                                    Files = 
                                     [
@@ -93,6 +96,7 @@ Target "CreateNugetPackage" (fun _ ->
                                       "Prism.Core", GreaterOrEqualSafe LOCKEDVERSION
                                       "Munq.IocContainer", GreaterOrEqualSafe LOCKEDVERSION
                                       "CommonServiceLocator", GreaterOrEqualSafe LOCKEDVERSION ] } )
+
   Pack (fun p -> { p with TemplateFile = "paket.template"
                           OutputPath = deployDirectory 
                           Version = nugetVersion }) 

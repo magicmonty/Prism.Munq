@@ -111,7 +111,11 @@ namespace Prism.Munq
             return _baseContainer.GetRegistrations(type);
         }
 
-        public ILifetimeManager DefaultLifetimeManager { get; set; }
+        public ILifetimeManager DefaultLifetimeManager
+        {
+            get { return _baseContainer.DefaultLifetimeManager; }
+            set { _baseContainer.DefaultLifetimeManager = value; }
+        }
 
         public TType Resolve<TType>() where TType : class
         {
